@@ -1,8 +1,10 @@
 package com.example.tasktierlist;
 
+import android.app.Application;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,16 +12,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlankFragment extends Fragment {
+public class MyTaskFragment extends Fragment {
 
-    private List<Tier> tierList;
+    TaskViewModel taskViewModel;
+    Application application;
 
-    public BlankFragment() {
+    public MyTaskFragment(Application application) {
         // Required empty public constructor
+        this.application = application;
     }
 
     @Override
@@ -27,22 +35,32 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
-        RecyclerView rvItem = view.findViewById(R.id.rv_item);
-        ItemAdapter itemAdapter = new ItemAdapter(buildItemList());
-        rvItem.setAdapter(itemAdapter);
-        rvItem.setLayoutManager(new LinearLayoutManager(getActivity()));
+        View view = inflater.inflate(R.layout.fragment_my_task, container, false);
+
+        taskViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(application)).get(TaskViewModel.class);
+
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        taskViewModel.getAllTasks().observe(this, tasks -> {
+            // Update the cached copy of the words in the adapter
+            RecyclerView rvItem = view.findViewById(R.id.rv_item);
+            ItemAdapter itemAdapter = new ItemAdapter(buildItemList(tasks));
+            rvItem.setAdapter(itemAdapter);
+            rvItem.setLayoutManager(new LinearLayoutManager(getActivity()));
+        });
 
         return view;
     }
 
-    private List<Tier> buildItemList() {
+    private List<Tier> buildItemList(List<Task> taskList) {
         List<Tier> tierList = new ArrayList<>();
+
         List<Task> sTier = new ArrayList<>();
         List<Task> aTier = new ArrayList<>();
         List<Task> bTier = new ArrayList<>();
 
-        for (Task t : buildSubItemList()) {
+        for (Task t : taskList) {
             if(t.getDeadline() <= 1){
                 sTier.add(t);
             }
@@ -59,16 +77,5 @@ public class BlankFragment extends Fragment {
         tierList.add(new Tier("B", bTier));
 
         return tierList;
-    }
-
-    private List<Task> buildSubItemList() {
-        List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task("Fragment vs RecycleView", "Dalam bentuk PDF", 5, "Google", "E-Learning", "PPB_NIM"));
-        taskList.add(new Task("MindMap", "Dalam bentuk PDF bergambar", 3, "SWEBOKV3", "E-Learning", "MindMap_NIM"));
-        taskList.add(new Task("Sensor", "Kelompok Dalam bentuk PDF", 1, "Youtube", "E-Learning", "PPL_NIM"));
-        taskList.add(new Task("Instal Arduino", "Dalam bentuk PDF", 2, "Google", "E-Learning", "PPL_NIM"));
-        taskList.add(new Task("Mockup", "Dalam bentuk PDF", 4, "Google", "E-Learning", "PPB_NIM"));
-
-        return taskList;
     }
 }

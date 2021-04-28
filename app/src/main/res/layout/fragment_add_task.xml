@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AddLayoutFragment"
+    tools:context=".AddTaskFragment"
     android:id="@+id/frAddTask">
 
     <androidx.cardview.widget.CardView
@@ -13,12 +13,15 @@
         app:cardCornerRadius="10dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
-        app:cardBackgroundColor="#C5C1C1">
+        app:cardBackgroundColor="#DFDFDF">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
@@ -26,97 +29,169 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Matakuliah"
-                android:textColor="@color/white"
+                android:textColor="#3372EF"
                 android:textSize="24sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etMatakuliah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="Matakuliah..."
+                android:hint="matakuliah..."
+                android:textColorHighlight="#3372EF"
+                android:backgroundTint="#3372EF"
                 android:textSize="20dp"
                 android:layout_marginHorizontal="10dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name Task"
-                android:textColor="@color/white"
+                android:text="Judul Tugas"
+                android:textColor="#3372EF"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="Name Task..."
+                android:hint="judul tugas..."
                 android:textSize="20dp"
-                android:layout_marginHorizontal="10dp" />
+                android:layout_marginHorizontal="10dp"
+                android:textColorHighlight="#3372EF"
+                android:backgroundTint="#3372EF"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                android:textColor="@color/white"
+                android:text="Deskripsi"
+                android:textColor="#3372EF"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/etDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="Description..."
+                android:hint="deskripsi..."
                 android:textSize="20dp"
-                android:layout_marginHorizontal="10dp" />
+                android:layout_marginHorizontal="10dp"
+                android:textColorHighlight="#3372EF"
+                android:backgroundTint="#3372EF"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Deadline"
-                android:textColor="@color/white"
+                android:textColor="#3372EF"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="#3372EF"
+                    android:hint="DD/MM/YYYY..."
+                    android:textColorHighlight="#3372EF"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/calendaricon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/calendaricon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/icons8_calendar_64"
+                    app:layout_constraintBottom_toBottomOf="@+id/etDeadline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/etDeadline"
+                    app:layout_constraintTop_toTopOf="@+id/etDeadline" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="#3372EF"
+                    android:hint="DD/MM/YYYY..."
+                    android:textColorHighlight="#3372EF"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/timeicon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/timeicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/icons8_time_64"
+                    app:layout_constraintBottom_toBottomOf="@+id/etTime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/etTime"
+                    app:layout_constraintTop_toTopOf="@+id/etTime" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Referensi"
+                android:textColor="#3372EF"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/etReference"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="Deadline..."
+                android:hint="referensi..."
                 android:textSize="20dp"
-                android:layout_marginHorizontal="10dp" />
+                android:layout_marginHorizontal="10dp"
+                android:textColorHighlight="#3372EF"
+                android:backgroundTint="#3372EF"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reference"
-                android:textColor="@color/white"
+                android:text="Pengumpulan Tugas"
+                android:textColor="#3372EF"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/etSend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="Referencen..."
+                android:hint="alamat pengiriman tugas..."
                 android:textSize="20dp"
-                android:layout_marginHorizontal="10dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Send Task"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="Send Task..."
-                android:textSize="20dp"
-                android:layout_marginHorizontal="10dp" />
+                android:layout_marginHorizontal="10dp"
+                android:textColorHighlight="#3372EF"
+                android:backgroundTint="#3372EF"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -136,7 +211,7 @@
 
 
         </LinearLayout>
-
+        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 
