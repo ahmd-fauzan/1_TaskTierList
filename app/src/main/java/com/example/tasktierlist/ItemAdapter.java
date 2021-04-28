@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder>{
     private String[] taskLists;
-
     public recyclerAdapter (String[] taskLists){
         this.taskLists = taskLists;
     }
@@ -20,13 +19,13 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
         public MyViewHolder (final View view){
             super(view);
-            nameTxt = view.findViewById(R.id.matakuliah);
+            nameTxt = view.findViewById(R.id.taskList);
         }
     }
     @NonNull
     @Override
     public recyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_items, parent, false);
         return new MyViewHolder(itemView);
     }
 
